@@ -5,25 +5,28 @@
 #include<sstream>
 #include <map>
 #include <set>
+#include <locale.h>
 using namespace std;
 
-
+/*!
+    \brief Implementation of the class Tape
+*/
 class Tape
 {
 public:
     void input(istream&, vector<char>);
     void printTape();
     void change(int, string);
-    void add(string str);
     vector <string> getTape();
     void setTape(vector<string>);
     bool check(vector<char>, string);
-
 private:
-
     vector<string> tape;
 };
 
+/*!
+    \brief Implementation of the class Alphabet
+*/
 class Alphabet
 {
 public:
@@ -38,6 +41,9 @@ private:
     vector<char> alphabet;
 };
 
+/*!
+    \brief Implementation of the class Rules
+*/
 class Rules
 {
 public:
@@ -54,7 +60,9 @@ private:
     vector <pair<string, string>> rules;
 
 };
-
+/*!
+    \brief Implementation of the class NAM
+*/
 class NAM
 {
 public:
