@@ -1,6 +1,7 @@
 #include<iostream>
 #include"RepairFirma.h"
 
+
 using namespace std;
 
 int main()
@@ -16,7 +17,7 @@ int main()
 	DoorsInstallation doors1("doorsinstallation", 0, 1, 44);
 	Cabinet cabinet1(2.5, 2, 1, 7, doors1);
 	DoorsInstallation doors2("doorsinstallation", 1, 0, 30);
-	Cabinet cabinet2(1.5, 2, 0.5, 3, doors2);
+	Cabinet cabinet2(1.5, -2, 0.5, 3, doors2);
 	vector<Cabinet> cabinets;
 	cabinets.push_back(cabinet1);
 	cabinets.push_back(cabinet2);

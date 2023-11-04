@@ -3,7 +3,9 @@
 #include <vector>
 #include"Services.h"
 using namespace std;
-
+/*!
+    \brief Implementation of the class Client
+*/
 class Client
 {
 public:
@@ -16,23 +18,26 @@ public:
 private:
     double value;
 };
-
+/*!
+    \brief Implementation of the class RepairFirma
+*/
 class RepairFirma
 {
 public:
     RepairFirma(string, double);
     string name;
     void work(Client);
-    void pay(Client);;
-    bool consultation(Client);
-    double getPrice(Client);
+    void showStatus(Client);
+    void checkRequests(Client);
+private:
+    double account;
+    void pay(Client);
+    bool consultation(Client)const;
+    double getPrice(Client)const;
     void accept(Client);
     void start(Client);
     void finish(Client);
-    Status defineStatus(Client client);
-    void showStatus(Client client);
-private:
-    double account;
+    Status defineStatus(Client client) const;
 };
 
 
