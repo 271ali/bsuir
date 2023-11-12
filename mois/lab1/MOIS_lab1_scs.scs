@@ -1,0 +1,39 @@
+
+architecture_set
+      <-sc_node_class;
+      ->concept_cathedral;;
+
+concept_cathedral <= nrel_sc_text_translation:...
+(*
+      <-definition
+      -> [Собор - центральный христианский храм в городе];;
+       (* <- lang_ru;;*);
+*)
+
+concept_cathedral
+      => nrel_main_id:
+      [собор]
+      (* <- lang_ru;;*);
+      [catherdal]
+      (* <- lang_en;;*);;
+      [Dom]
+      (* <- lang_de;;*);;
+
+concept_cathedral
+->CologneCathedral;
+->NotreDameCathedral;
+->MilanCathedral;;
+
+concept_cathedral->rrel_head:concept_bishop;;
+
+concept_cathedrall=>nrel_timeOfAppearance:4thCenturyBC;;
+time_period_set
+      <- sc_node_class;
+      -> 4thCenturyBC.;; 
+
+concept_cathedral=>nrel_countryOfAppearance:Italy
+countries_set
+      <- sc_node_class;
+      -> Italy;;
+concept_cathedral=>nrel_appointment:concept_divineService;;
+

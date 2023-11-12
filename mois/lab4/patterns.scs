@@ -1,0 +1,23 @@
+lab4_patterns
+    => nrel_main_idtf: [Шаблоны для поиска по БЗ] (* <- lang_ru;; *);
+    -> pattern1;
+    -> pattern2;
+    -> pattern3;
+    -> pattern4;
+    -> pattern5;
+    -> pattern6;
+    -> pattern7;
+    -> pattern8;
+    -> pattern9;
+    -> pattern10;
+
+pattern1 => nrel_main_idtf: [Найти все архитектурные сооружения 18 века] (* <- lang_ru;; *);;
+pattern2 => nrel_main_idtf: [Найти все архитектурные сооружения,относящиеся к ландшафтным композициям] (* <- lang_ru;; *);;
+pattern3 => nrel_main_idtf: [Найти замки  13 века] (* <- lang_ru;; *);;
+pattern4 => nrel_main_idtf: [Найти все театры] (* <- lang_ru;; *);;
+pattern5 => nrel_main_idtf: [Найти архитектурные сооружения 20 века в стиле арт-деко] (* <- lang_ru;; *);;
+pattern6 => nrel_main_idtf: [В какой стране находится Тауэрский мост] (* <- lang_ru;; *);;
+pattern7 => nrel_main_idtf: [Найти все архитектрные сооружения в стиле готика] (* <- lang_ru;; *);;
+pattern8 => nrel_main_idtf: [Что такое Бурдж-Халифа] (* <- lang_ru;; *);;
+pattern9 => nrel_main_idtf: [Найти жилой дом в Австрии в стиле экспрессионизм] (* <- lang_ru;; *);;
+pattern10 => nrel_main_idtf:[Найти все архитектурные сооружения Франции 17 века] (* <- lang_ru;; *);;
