@@ -69,9 +69,9 @@ section_subject_domain_of_architecture
                 concept_residential_buildings;
 
             -> rrel_explored_relation:
-                nrel_country;;
-                nrel_age;;
-                nrel_style;;
+                nrel_country;
+                nrel_age;
+                nrel_style;
                 nrel_type;;
    
     *];;
