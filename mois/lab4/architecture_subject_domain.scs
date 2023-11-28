@@ -23,7 +23,7 @@ section_subject_domain_of_optical_instruments
             (* => nrel_main_idtf: [Ландшафтные композиции] (* <- lang_ru;;*);;*);
        concept_residential_buildings
             (* => nrel_main_idtf:[Жилые застройки] (* <- lang_ru;;*);;*);
-        nrel_age
+        nrel_century
             (* => nrel_main_idtf: [Век] (* <- lang_ru;;*);;*);
         nrel_style
             (* => nrel_main_idtf: [Стиль] (* <- lang_ru;;*);;*);
@@ -69,8 +69,8 @@ section_subject_domain_of_architecture
                 concept_residential_buildings;
 
             -> rrel_explored_relation:
-                nrel_country;
-                nrel_age;
+                nrel_country
+                nrel_century;
                 nrel_style;
                 nrel_type;;
    

@@ -1,5 +1,5 @@
 nrel_century
-=>nrel_main_idtf:[век*](* <- lang_ru;; *);;
+=>nrel_main_idtf:[век](* <- lang_ru;; *);;
 
 12th_century
 =>nrel_main_idtf:[12-й век](* <- lang_ru;; *);;

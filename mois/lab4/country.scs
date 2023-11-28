@@ -1,5 +1,5 @@
 nrel_country
-=>nrel_main_idtf:[страна*](* <- lang_ru;; *);;
+=>nrel_main_idtf:[страна](* <- lang_ru;; *);;
 
 France
 =>nrel_main_idtf:[Франция](* <- lang_ru;; *);;
