@@ -78,7 +78,7 @@ section_subject_domain_of_architecture
     *];;
 
 concept_architecture
-<- concept_volumetric_structures;
-<-concept_residential_buildings;
-<-concept_landscape_compositions;;
+-> concept_volumetric_structures;
+->concept_residential_buildings;
+->concept_landscape_compositions;;
 

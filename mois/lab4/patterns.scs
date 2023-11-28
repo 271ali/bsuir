@@ -9,7 +9,7 @@ lab4_patterns
     -> pattern7;
     -> pattern8;
     -> pattern9;
-    -> pattern10;
+    -> pattern10;;
 
 pattern1 => nrel_main_idtf: [Найти все архитектурные сооружения 18 века] (* <- lang_ru;; *);;
 pattern2 => nrel_main_idtf: [Найти все архитектурные сооружения,относящиеся к ландшафтным композициям] (* <- lang_ru;; *);;
