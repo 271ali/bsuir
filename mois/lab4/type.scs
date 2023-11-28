@@ -1,4 +1,4 @@
-nrel_type
+nrel_type_of_building
   =>nrel_main_idtf:[тип](* <- lang_ru;; *);;
 
 bridge
