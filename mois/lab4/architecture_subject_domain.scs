@@ -1,4 +1,4 @@
-section_subject_domain_of_optical_instruments
+section_subject_domain_of_architecture
 
     => nrel_main_idtf:
     [Раздел. Предметная область архитектура]
@@ -61,7 +61,12 @@ section_subject_domain_of_architecture
 
             -> rrel_maximum_studied_object_class:
                 concept_architecture 
-                    (* => nrel_main_idtf: [Архитектура] (* <- lang_ru;;*);;*);
+                (*
+                   (* => nrel_main_idtf: [Архитектура] (* <- lang_ru;;*);;*);
+                   -> concept_volumetric_structures;
+                   ->concept_residential_buildings;
+                   ->concept_landscape_compositions;;
+                 *);
 
             -> rrel_not_maximum_studied_object_class:
                 concept_volumetric_structures;
@@ -74,11 +79,11 @@ section_subject_domain_of_architecture
                 nrel_style;
                 nrel_type_of_building;;
 
+concept_architecture
+
+
    
     *];;
 
-concept_architecture
--> concept_volumetric_structures;
-->concept_residential_buildings;
-->concept_landscape_compositions;;
+
 
