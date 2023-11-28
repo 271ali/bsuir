@@ -7,7 +7,7 @@ section_subject_domain_of_optical_instruments
     (* <- lang_en;;*);
  <= nrel_section_decomposition:...
     (*
-        <- sc_node_tuple;
+        <- sc_node_tuple;;
         -> section_subject_domain_of_architecture 
             (* => nrel_main_idtf: [Раздел. Предметная область архитектуры объемных сооружений] (* <- lang_ru;;*);;*);;
         -> section_subject_domain_of_architecture
