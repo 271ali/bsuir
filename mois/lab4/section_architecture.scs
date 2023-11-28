@@ -125,7 +125,7 @@ Golden_Gate_Bridge
     => nrel_country: USA;
     => nrel_century: 20th_century;
     => nrel_architectural_style:art_deco;
-    <-     <- concept_volumetric_structures;;
+    <- concept_volumetric_structures;;
 
 St_Stephans_Cathedral
  => nrel_main_idtf: [St_Stephans _Cathedral] (* <- lang_en;; *);
@@ -133,4 +133,4 @@ St_Stephans_Cathedral
     => nrel_country: Austria;
     => nrel_century: 12th_century;
     => nrel_architectural_style:gothic;
-    <-     <- concept_volumetric_structures;;
+    <- concept_volumetric_structures;;
