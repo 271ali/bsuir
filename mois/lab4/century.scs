@@ -34,7 +34,7 @@ nrel_century
 ->[19-й век];;
 
 20th_century
-=>nrel_main_idtf:[20-й век](* <- lang_ru;; *);;
+=>nrel_main_idtf:[20-й век](* <- lang_ru;; *);
 ->[20-й век];;
 
 21th_century
