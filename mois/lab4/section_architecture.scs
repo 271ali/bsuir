@@ -1,19 +1,19 @@
 section_architecture
-->Empire_State_Building
-->La_Scala
-->Bran_Castle
-->Tuileries_Gardens
-->Versal
-->Brandenburg_Gate
-->Tower_Bridge
-->Burj_Khalifa
-->Neuschwanstein_Castle
-->Sydney_Opera_House
-->Louvre
-->Buckingham_Palace
-->Hundertwasser_House
-->Golden_Gate_Bridge
-->St_Stephans_Cathedral
+->Empire_State_Building;
+->La_Scala;
+->Bran_Castle;
+->Tuileries_Gardens;
+->Versal;
+->Brandenburg_Gate;
+->Tower_Bridge;
+->Burj_Khalifa;
+->Neuschwanstein_Castle;
+->Sydney_Opera_House;
+->Louvre;
+->Buckingham_Palace;
+->Hundertwasser_House;
+->Golden_Gate_Bridge;
+->St_Stephans_Cathedral;;
 
 Empire_State_Building
     => nrel_main_idtf: [Empire_State_Building] (* <- lang_en;; *);
