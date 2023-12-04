@@ -22,7 +22,7 @@ Empire_State_Building
     => nrel_century: 20th_century;
     => nrel_architectural_style:art_deco; 
     <- concept_residential_buildings;
-    <-concept_architecture;;
+    <- concept_architecture;;
 
 La_Scala
     => nrel_main_idtf: [La_Scala] (* <- lang_en;; *);
@@ -31,7 +31,7 @@ La_Scala
     => nrel_century: 18th_century;
     => nrel_architectural_style:neo_classicism; 
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Bran_Castle
     => nrel_main_idtf: [Bran_Castle] (* <- lang_en;; *);
@@ -40,7 +40,7 @@ Bran_Castle
     => nrel_century:13th_century;
     => nrel_architectural_style:neo_gothic; 
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Tuileries_Gardens
     => nrel_main_idtf: [Tuileries_Gardens] (* <- lang_en;; *);
@@ -49,7 +49,7 @@ Tuileries_Gardens
     => nrel_century: 16th_century;
     => nrel_architectural_style:italian_mannerism; 
     <- concept_landscape_compositions;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Versal
     => nrel_main_idtf: [Versal] (* <- lang_en;; *);
@@ -58,7 +58,7 @@ Versal
     => nrel_century: 17th_century;
     => nrel_architectural_style:baroque; 
     <- concept_landscape_compositions;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Brandenburg_Gate
     => nrel_main_idtf: [Brandenburg_Gate] (* <- lang_en;; *);
@@ -67,7 +67,7 @@ Brandenburg_Gate
     => nrel_century: 18th_century;
     => nrel_architectural_style:classicism; 
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Tower_Bridge
     => nrel_main_idtf: [Tower_Bridge] (* <- lang_en;; *);
@@ -76,7 +76,7 @@ Tower_Bridge
     => nrel_century: 19th_century;
     => nrel_architectural_style:neo_gothic; 
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Burj_Khalifa
  => nrel_main_idtf: [Burj_Khalifa] (* <- lang_en;; *);
@@ -85,7 +85,7 @@ Burj_Khalifa
     => nrel_century: 21th_century;
     => nrel_architectural_style:modernism; 
     <- concept_residential_buildings;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Neuschwanstein_Castle
  => nrel_main_idtf: [Neuschwanstein_Castle] (* <- lang_en;; *);
@@ -94,7 +94,7 @@ Neuschwanstein_Castle
     => nrel_century: 19th_century;
     => nrel_architectural_style:neo_romanesque ;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+   <- concept_architecture;;
 
 Sydney_Opera_House
  => nrel_main_idtf: [Sydney_Opera_House] (* <- lang_en;; *);
@@ -103,7 +103,7 @@ Sydney_Opera_House
     => nrel_century: 20th_century;
     => nrel_architectural_style:modernism;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+   <- concept_architecture;;
 
 Louvre
  => nrel_main_idtf: [Louvre] (* <- lang_en;; *);
@@ -112,7 +112,7 @@ Louvre
     => nrel_century: 18th_century;
     => nrel_architectural_style:classicism;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Buckingham_Palace
  => nrel_main_idtf: [Buckingham_Palace] (* <- lang_en;; *);
@@ -121,7 +121,7 @@ Buckingham_Palace
     => nrel_century: 18th_century;
     => nrel_architectural_style:neo_classicism;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Hundertwasser_House
  => nrel_main_idtf: [Hundertwasser_House] (* <- lang_en;; *);
@@ -130,7 +130,7 @@ Hundertwasser_House
     => nrel_century:20th_century;
     => nrel_architectural_style:expressionism;
     <- concept_residential_buildings;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 Golden_Gate_Bridge
  => nrel_main_idtf: [Golden_Gate_Bridge] (* <- lang_en;; *);
@@ -139,7 +139,7 @@ Golden_Gate_Bridge
     => nrel_century:20th_century;
     => nrel_architectural_style:art_deco;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
 
 St_Stephans_Cathedral
  => nrel_main_idtf: [St_Stephans _Cathedral] (* <- lang_en;; *);
@@ -148,4 +148,4 @@ St_Stephans_Cathedral
     => nrel_century: 12th_century;
     => nrel_architectural_style:gothic;
     <- concept_volumetric_structures;
- <-concept_architecture;;
+    <- concept_architecture;;
