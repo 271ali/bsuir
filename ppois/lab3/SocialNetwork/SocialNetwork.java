@@ -1,10 +1,7 @@
 package org.example.SocialNetwork;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
+
 public class SocialNetwork {
     private String name;
     private Map<String, Account> Users = new HashMap<String, Account>();
@@ -17,63 +14,79 @@ public class SocialNetwork {
         this.name=name;
     }
 
-    public Optional<Account> logIn(String nickname, int age , Gender gender, String password)
+    public Account logIn(String nickname, int age , Gender gender, String password)
     {
-        if(passCheck.check(password)&&nickCheck.check(nickname)&&uniqCheck.check(nickname,Users)) {
-            Account account=new Account(nickname,age,gender,password);
-            Users.put(nickname,account);
-            return Optional.of(account);
+        try {
+        if (!passCheck.check(password) || !nickCheck.check(nickname) || !uniqCheck.check(nickname, Users)) {
+            throw new Exception("Wrong data");
         }
-        else
-            return Optional.empty();
+       } catch (Exception ex) {
+        System.out.println("Wrong data for Log In");
+        throw new RuntimeException(ex);
+      }
+        Account account=new Account(nickname,age,gender,password);
+        Users.put(nickname,account);
+        return account;
     }
-    public Optional<Account> signIn(String nickname, String password)
+    public Account signIn(String nickname, String password)
     {
         Account account=Users.get(nickname);
-        if(account!=null)
-        {
-            if(account.getPassword().equals(password))return Optional.of(account);
-            else {
-                System.out.println("Uncorrect password");
-                return Optional.empty();
+            try {
+                if (account==null||!Objects.equals(account.getPassword(), password)) {
+                    throw new Exception("Wrong data");
+                }
+            } catch (Exception ex) {
+                System.out.println("Wrong data for Sign In");
+                throw new RuntimeException(ex);
             }
-        }
-        else {
-            System.out.println("Uncorrect nickname");
-            return Optional.empty();
-        }
+            return account;
     }
-    public void deleteAccount(Optional<Account> account)throws IllegalArgumentException
+    public void deleteAccount(Account account)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        Users.remove(account.get().getNickname());
+        Users.remove(account.getNickname());
         account=null;
     }
 
-    public void addPost (Optional<Account> account, String content)throws IllegalArgumentException
+    public void addPost (Account account, String content)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        Post post=new Post(account.get().getPosts().size()+1,content,account.get().getNickname());
-        account.get().getPosts().add(post);
+        Post post=new Post(account.getPosts().size()+1,content,account.getNickname());
+        account.getPosts().add(post);
     }
-    public void deletePost(Optional<Account> account, int postNumber)throws IllegalArgumentException
+    public void deletePost(Account account, int postNumber)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
         int index=0;
-        for(Post post: account.get().getPosts()) {
+        for(Post post: account.getPosts()) {
             if (post.getNumber() == postNumber) {
                 index=post.getNumber();
-              account.get().getPosts().remove(post);
+              account.getPosts().remove(post);
               break;
             }
         }
-        for(Post post: account.get().getPosts()) {
+        for(Post post: account.getPosts()) {
             if (post.getNumber()>index) {
                 int number=post.getNumber();
                 number--;
@@ -81,31 +94,46 @@ public class SocialNetwork {
             }
         }
     }
-    public void subscribe(Optional<Account> account, String userNickname)throws IllegalArgumentException
+    public void subscribe(Account account, String userNickname)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
        Account userAccount=Users.get(userNickname);
-       account.get().getSubscriptions().add(userNickname);
-       userAccount.getSubscribers().add(account.get().getNickname());
+       account.getSubscriptions().add(userNickname);
+       userAccount.getSubscribers().add(account.getNickname());
     }
-    public void unsubscribe(Optional<Account> account, String userNickname)throws IllegalArgumentException
+    public void unsubscribe(Account account, String userNickname)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
         Account userAccount=Users.get(userNickname);
-        account.get().getSubscriptions().remove(userNickname);
-        userAccount.getSubscribers().remove(account.get().getNickname());
+        account.getSubscriptions().remove(userNickname);
+        userAccount.getSubscribers().remove(account.getNickname());
     }
-    public Chat createGroupChat(Optional<Account> account, ArrayList<String> members, String name)throws IllegalArgumentException
+    public Chat createGroupChat(Account account, ArrayList<String> members, String name)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        members.add(account.get().getNickname());
-        for(Chat chat:account.get().getChats());
+        members.add(account.getNickname());
+        for(Chat chat:account.getChats());
         GroupChat groupChat=new GroupChat(name,members);
         for(String memberName:members)
         {
@@ -114,61 +142,109 @@ public class SocialNetwork {
         }
         return groupChat;
     }
-    public Chat createPersonalChat(Optional<Account> account, String nickname, String name)throws IllegalArgumentException
+    public Chat createPersonalChat(Account account, String nickname, String name)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
         Account member=Users.get(nickname);
-        PersonalChat personalChat=new PersonalChat(account.get().getNickname(),nickname,name);
+        PersonalChat personalChat=new PersonalChat(account.getNickname(),nickname,name);
         member.getChats().add(personalChat);
-        account.get().getChats().add(personalChat);
+        account.getChats().add(personalChat);
         return personalChat;
     }
 
-    public void sendMessage(Optional<Account> account, String content, String chatName)throws IllegalArgumentException
+    public void sendMessage(Account account, String content, String chatName)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        for(Chat chat: account.get().getChats()) {
+        for(Chat chat: account.getChats()) {
             if(chat.getName().equals(chatName)) {
-                Message message = new Message(chat.getMessages().size() + 1, content, account.get().getNickname());
+                Message message = new Message(chat.getMessages().size() + 1, content, account.getNickname());
                 chat.getMessages().add(message);
             }
         }
         System.out.println("Chat doesn't exist.Try again or create new chat");
     }
-    public Optional<GroupChat> findGroupChat(Optional<Account> account, String chatName)throws IllegalArgumentException
+    public GroupChat findGroupChat(Account account, String chatName)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        List<Chat> chats=account.get().getChats();
-        for(Chat chat:chats)
-        {
-            if(chat.getName().equals(chatName)&&chat.getClass()== GroupChat.class) return Optional.of((GroupChat)chat);
-        }
-        return Optional.empty();
+            List<Chat> chats = account.getChats();
+            Optional<GroupChat> answer=Optional.ofNullable(null);
+            for (Chat chat : chats) {
+                if (chat.getName().equals(chatName) && chat.getClass() == GroupChat.class) {
+                    answer=Optional.of((GroupChat) chat);
+                }
+            }
+            try
+            {
+                if(answer.isEmpty()) throw new Exception("Chat doesn't exist");
+            }catch (Exception ex)
+            {
+            System.out.println("Chat with the same name doesn't exist");
+                throw new RuntimeException(ex);
+            }
+
+           return answer.get();
     }
-    public Optional<PersonalChat> findPersonalChat(Optional<Account> account, String chatName)throws IllegalArgumentException
+    public PersonalChat findPersonalChat(Account account, String chatName)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        List<Chat> chats=account.get().getChats();
-        for(Chat chat:chats)
+        List<Chat> chats = account.getChats();
+        Optional<PersonalChat> answer=Optional.ofNullable(null);
+        for (Chat chat : chats) {
+            if (chat.getName().equals(chatName) && chat.getClass() == PersonalChat.class) {
+                answer=Optional.of((PersonalChat) chat);
+            }
+        }
+        try
         {
-            if(chat.getClass()== PersonalChat.class&&chat.getName().equals(chatName)) return Optional.of((PersonalChat)chat);
+            if(answer.isEmpty()) throw new Exception("Chat doesn't exist");
+        }catch (Exception ex)
+        {
+            System.out.println("Chat with the same name doesn't exist");
+            throw new RuntimeException(ex);
         }
-        return Optional.empty();
+
+        return answer.get();
     }
-    public void addMember(Optional<Account> account, String chatName, String member)throws IllegalArgumentException
+    public void addMember(Account account, String chatName, String member)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        for(Chat chat:account.get().getChats())
+        for(Chat chat:account.getChats())
         {
             if(chat.getClass()== GroupChat.class && chat.getName().equals(chatName))
             {
@@ -178,12 +254,17 @@ public class SocialNetwork {
             }
         }
     }
-    public void deleteMember(Optional<Account> account, String chatName, String member)throws IllegalArgumentException
+    public void deleteMember(Account account, String chatName, String member)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        for(Chat chat:account.get().getChats())
+        for(Chat chat:account.getChats())
         {
             if(chat.getClass()== GroupChat.class && chat.getName().equals(chatName))
             {
@@ -193,48 +274,81 @@ public class SocialNetwork {
         }
     }
 
-    public void like(Optional<Account> account, String nickname, int id)throws IllegalArgumentException
+    public void like(Account account, String nickname, int id)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
         Account user=Users.get(nickname);
-        Post post=findPost(nickname,id).get();
-        Like like=new Like(account.get().getNickname());
+        Post post=findPost(nickname,id);
+        Like like=new Like(account.getNickname());
         post.getLikes().add(like);
     }
-   public void comment(Optional<Account> account, String nickname, int id, String content)throws IllegalArgumentException
+   public void comment(Account account, String nickname, int id, String content)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
         Account user=Users.get(nickname);
-        Post post=findPost(nickname,id).get();
-        Message comment=new Message(post.getComments().size()+1,content,account.get().getNickname());
+        Post post=findPost(nickname,id);
+        Message comment=new Message(post.getComments().size()+1,content,account.getNickname());
         post.getComments().add(comment);
     }
-    public void changeAccess(Optional<Account> account, Access access)throws IllegalArgumentException
+    public void changeAccess(Account account, Access access)
     {
-        if (!account.isPresent()) {
-            throw new IllegalArgumentException("Пустой аккаунт");
+        try {
+            if (account==null) {
+                throw new Exception("Wrong data");
+            }
+        } catch (Exception ex) {
+            System.out.println("Wrong data for Sign In");
+            throw new RuntimeException(ex);
         }
-        account.get().setAccess(access);
+        account.setAccess(access);
     }
-    public Optional<Post> findPost(String nickname, int id)
+    public Post findPost(String nickname, int id)
     {
         Account account=Users.get(nickname);
         List<Post>posts=account.getPosts();
+        Optional<Post> answer=Optional.ofNullable(null);
         for(Post post:posts)
         {
             if(post.getNumber()==id)
             {
-                return Optional.of(post);
+                answer=Optional.ofNullable(post);
             }
         }
-        return Optional.empty();
+        try
+        {
+            if(answer.isEmpty()) throw new Exception("Post doesn't exist");
+        }catch (Exception ex)
+        {
+            System.out.println("Post doesn't exist");
+            throw new RuntimeException(ex);
+        }
+
+        return answer.get();
     }
-    public Optional<Account> findById(String nick) {
-        return Optional.ofNullable(Users.get(nick));
+    public Account findById(String nick) {
+        Optional<Account> answer;
+        try {
+            if (Users.get(nick) == null)throw new Exception("Account doesn't exist");
+        }catch (Exception ex)
+        {
+            System.out.println("Account doesn't exist");
+            throw new RuntimeException(ex);
+        }
+        return Users.get(nick);
     }
     public String getName() {
         return name;

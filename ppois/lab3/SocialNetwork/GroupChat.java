@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupChat extends Chat {
-    public GroupChat(String name, ArrayList<String> members)
+    public GroupChat(String name, List<String> members)
     {
         super(name);
         this.members=members;
