@@ -43,7 +43,7 @@ public class BidirectionalListTest {
         Book book1 = new Book("Gone with the wind", "Margaret Mitchell", 1936);
         Book book2 = new Book("Perfume", "Patrick Suskind", 1985);
         Book book3= new Book("Dracula", "Bram Stoker", 1897);
-        BidirectionalList <Book> list=new BidirectionalList<Book>(book1);
+        BidirectionalList<Book> list=new BidirectionalList<Book>(book1);
         list.addNext(book2);
         list.addNext(book3);
         list.deleteLast();
@@ -89,8 +89,7 @@ public class BidirectionalListTest {
     }
     @Test
     public void getMin()
-    {
-        Book book1 = new Book("Gone with the wind", "Margaret Mitchell", 1936);
+    {   Book book1 = new Book("Gone with the wind", "Margaret Mitchell", 1936);
         Book book2 = new Book("Perfume", "Patrick Suskind", 1985);
         Book book3= new Book("Dracula", "Bram Stoker", 1897);
         BidirectionalList<Book> list=new BidirectionalList<Book>(book1);

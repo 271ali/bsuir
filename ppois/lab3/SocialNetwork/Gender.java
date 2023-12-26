@@ -1,3 +1,5 @@
+package org.example.SocialNetwork;
+
 public enum Gender {
     female("female"),
     male("male");

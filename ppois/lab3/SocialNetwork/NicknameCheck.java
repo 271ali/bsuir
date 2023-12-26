@@ -1,8 +1,10 @@
+package org.example.SocialNetwork;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NicknameCheck {
-    boolean check(String nickname)
+    public boolean check(String nickname)
     {
         String regex = "^[a-zA-Z0-9_.]{6,30}$";
         Pattern pattern = Pattern.compile(regex);

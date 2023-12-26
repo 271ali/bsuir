@@ -1,15 +1,18 @@
+package org.example.SocialNetwork;
+
 import java.util.ArrayList;
-import java.util.Objects;
-   public class Account {
-    String nickname;
-    int age;
-    Gender gender;
-    Access access;
-    ArrayList<Post>posts=new ArrayList<>();
-    ArrayList<Chat> chats=new ArrayList<>();
-    ArrayList<String> subscribers=new ArrayList<String>();
-    ArrayList<String> subscriptions=new ArrayList<String>();
-    String password;
+import java.util.List;
+
+public class Account{
+       private String nickname;
+       private int age;
+       private Gender gender;
+       private Access access;
+       private List<Post> posts=new ArrayList<>();
+       private List<Chat> chats=new ArrayList<>();
+       private List<String> subscribers=new ArrayList<String>();
+       private List<String> subscriptions=new ArrayList<String>();
+       private String password;
     Account(String nickname,  int age, Gender gender,String password)
     {
         this.nickname=nickname;
@@ -33,23 +36,24 @@ import java.util.Objects;
            return access;
        }
 
-       public ArrayList<Chat> getChats() {
+       public List<Chat> getChats() {
         return chats;
     }
 
-       public ArrayList<String> getSubscribers() {
+       public List<String> getSubscribers() {
         return subscribers;
     }
 
-       public ArrayList<String> getSubscriptions() {
+       public List<String> getSubscriptions() {
         return subscriptions;
     }
 
-       public ArrayList<Post> getPosts() {
+       public List<Post> getPosts() {
         return posts;
     }
 
-    void setAccess(Access access) {
+
+       void setAccess(Access access) {
         this.access = access;
 
     }

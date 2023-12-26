@@ -1,13 +1,16 @@
-import java.util.ArrayList;
+package org.example.SocialNetwork;
 
- public class GroupChat extends Chat {
+import java.util.ArrayList;
+import java.util.List;
+
+public class GroupChat extends Chat {
     public GroupChat(String name, ArrayList<String> members)
     {
         super(name);
         this.members=members;
     }
-    ArrayList<String> members;
-    public ArrayList<String> getMembers()
+     private List<String> members;
+    public List<String> getMembers()
     {
         return members;
     }

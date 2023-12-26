@@ -1,13 +1,17 @@
 
+import org.example.SocialNetwork.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Map;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
+
 
 public class SocialNetworkTest {
-    boolean postCompare(Post expected,Post result)
+    boolean postCompare(Post expected, Post result)
     {
         if(expected.getNumber()==result.getNumber())
         {
@@ -23,7 +27,7 @@ public class SocialNetworkTest {
         }
         else return false;
     }
-boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
+boolean postsCompare(List<Post> expected, List<Post> result)
 {
     if(expected.size()!= result.size()) {return false;}
         for(int i=0;i<expected.size();i++) {
@@ -32,7 +36,7 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         }
         return true;
 }
-    boolean usersCompare(ArrayList<String> expected,ArrayList<String> result)
+    boolean usersCompare(List<String> expected,List<String> result)
     {
         if(expected.size()!= result.size()) {return false;}
         for(int i=0;i<expected.size();i++)
@@ -45,7 +49,7 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         }
         return true;
     }
-    boolean messagesCompare(ArrayList<Message> expected,ArrayList<Message> result)
+    boolean messagesCompare(List<Message> expected, List<Message> result)
     {
         if(expected.size()!= result.size()) {return false;}
         for(int i=0;i<expected.size();i++)
@@ -66,7 +70,7 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         }
         return true;
     }
-    boolean groupChatCompare(GroupChat expected ,GroupChat result)
+    boolean groupChatCompare(GroupChat expected , GroupChat result)
     {
             if(usersCompare(expected.getMembers(),result.getMembers()))
             {
@@ -83,7 +87,7 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
             else return false;
 
     }
-    boolean personalChatCompare(PersonalChat expected ,PersonalChat result)
+    boolean personalChatCompare(PersonalChat expected , PersonalChat result)
     {
         if(expected.getFirstMember().equals(result.getFirstMember()))
         {
@@ -97,7 +101,7 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         } else return false;
 
     }
-    boolean chatsCompare(ArrayList<Chat> expected,ArrayList<Chat> result) {
+    boolean chatsCompare(List<Chat> expected, List<Chat> result) {
         if (expected.size() != result.size()) {
             return false;
         }
@@ -139,16 +143,13 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
     @Test
     void uniqCheck()
     {
-        Account account1=new Account("aaa111__A",33, Gender.male," ");
-        Account account2=new Account("gg2345J_",13, Gender.female," ");
-        Account account3=new Account("boB4000_000",21, Gender.male," ");
-        ArrayList<Account> accounts=new ArrayList<>();
-        accounts.add(account1);
-        accounts.add(account2);
-        accounts.add(account3);
+        SocialNetwork sn=new SocialNetwork("sn");
+        sn.logIn("aaa111__A",33, Gender.male," ");
+        sn.logIn("gg2345J_",13, Gender.female," ");
+        sn.logIn("boB4000_000",21, Gender.male," ");
         String nickname4="dima_Fufel5678";
         UniqCheck object=new UniqCheck();
-        Assertions.assertEquals(object.check(nickname4,accounts),true);
+        Assertions.assertEquals(object.check(nickname4,sn.getUsers()),true);
 
     }
 
@@ -156,25 +157,25 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
     void logIn()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Map<String,Account>users =sn.getUsers();
-        assertEquals(myAccount,users.get("alibaba"));
+        Optional<Account> myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Map<String, Account>users =sn.getUsers();
+        assertEquals(myAccount.get(),users.get("alibaba"));
     }
     @Test
     void signIn()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.signIn("alibaba","12345aBc_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.signIn("alibaba","12345aBc_");
         assertEquals(myAccount2,myAccount1);
     }
     @Test
     void deleteAccount()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         sn.deleteAccount(myAccount);
-        Map<String,Account>users =sn.getUsers();
+        Map<String, Account>users =sn.getUsers();
         users.get("alibaba");
         assertEquals(users.get("alibaba"),null);
     }
@@ -182,58 +183,58 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
     void addPost()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         sn.addPost(myAccount,"hello");
         Post post=new Post(1,"hello","alibaba");
-        ArrayList<Post> posts=new ArrayList<>();
+        List<Post> posts=new ArrayList<>();
         posts.add(post);
-        assertTrue(postsCompare(myAccount.getPosts(),posts));
+        assertTrue(postsCompare(myAccount.get().getPosts(),posts));
     }
     @Test
     void deletePost()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         sn.addPost(myAccount,"hello");
         sn.addPost(myAccount,"bye");
         sn.deletePost(myAccount,1);
         Post post=new Post(1,"bye","alibaba");
-        ArrayList<Post> posts=new ArrayList<>();
+        List<Post> posts=new ArrayList<>();
         posts.add(post);
-        assertTrue(postsCompare(myAccount.getPosts(),posts));
+        assertTrue(postsCompare(myAccount.get().getPosts(),posts));
     }
     @Test
     void subscribe()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.subscribe(myAccount1,"oppenheimer");
         ArrayList<String> subscribers=new ArrayList<String>();
         subscribers.add("alibaba");
-        assertTrue(usersCompare(myAccount2.getSubscribers(),subscribers));
+        assertTrue(usersCompare(myAccount2.get().getSubscribers(),subscribers));
     }
     @Test
     void unsubscribe()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
-        Account myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
         sn.subscribe(myAccount1,"oppenheimer");
         sn.subscribe(myAccount1,"peterParker");
         sn.unsubscribe(myAccount1,"oppenheimer");
         ArrayList<String> subscriptions=new ArrayList<String>();
         subscriptions.add("peterParker");
-        assertTrue(usersCompare(myAccount1.getSubscriptions(),subscriptions));
+        assertTrue(usersCompare(myAccount1.get().getSubscriptions(),subscriptions));
     }
     @Test
     void createGroupChat()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
-        Account myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
         ArrayList<String> members=new ArrayList<>();
         members.add("alibaba");
         members.add("oppenheimer");
@@ -242,89 +243,89 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         GroupChat chat=new GroupChat("friends",members);
         ArrayList<Chat> chats=new ArrayList<>();
         chats.add(chat);
-        assertTrue(chatsCompare(myAccount2.getChats(),chats));
+        assertTrue(chatsCompare(myAccount2.get().getChats(),chats));
     }
     @Test
     void createPersonalChat()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.createPersonalChat(myAccount2,"alibaba","name");
         PersonalChat chat=new PersonalChat("oppenheimer","alibaba","name");
         ArrayList<Chat> chats=new ArrayList<>();
         chats.add(chat);
-        assertTrue(chatsCompare(myAccount2.getChats(),chats));
+        assertTrue(chatsCompare(myAccount2.get().getChats(),chats));
     }
     @Test
     void findGroupChat()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
-        Account myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
         ArrayList<String> members=new ArrayList<>();
         members.add("alibaba");
         members.add("oppenheimer");
         members.add("peterParker");
         sn.createGroupChat(myAccount1,members,"friends");
         GroupChat chat=new GroupChat("friends",members);
-        GroupChat result=sn.findGroupChat(myAccount1,"friends");
-        assertTrue(groupChatCompare(chat,result));
+        Optional<GroupChat> result=sn.findGroupChat(myAccount1,"friends");
+        assertTrue(groupChatCompare(chat,result.get()));
     }
     @Test
     void findPersonalChat()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.createPersonalChat(myAccount1,"oppenheimer","name");
         PersonalChat chat=new PersonalChat("alibaba","oppenheimer","name");
-        PersonalChat result=sn.findPersonalChat(myAccount1,"name");
-        assertTrue(personalChatCompare(result,chat));
+        Optional<PersonalChat> result=sn.findPersonalChat(myAccount1,"name");
+        assertTrue(personalChatCompare(result.get(),chat));
     }
     @Test
     void sendMessage()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.createPersonalChat(myAccount1,"oppenheimer","name");
         sn.sendMessage(myAccount1,"hello","name");
-        PersonalChat chat=sn.findPersonalChat(myAccount2,"name");
+        Optional<PersonalChat> chat=sn.findPersonalChat(myAccount2,"name");
         Message myMessage=new Message(1,"hello","alibaba");
         ArrayList<Message>result=new ArrayList<>();
         result.add(myMessage);
-        assertTrue(messagesCompare(chat.getMessages(),result));
+        assertTrue(messagesCompare(chat.get().getMessages(),result));
     }
 
    @Test
    void addMember()
    {
        SocialNetwork sn=new SocialNetwork("odnoklassniki");
-       Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-       Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
-       Account myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
-       Account myAccount4=sn.logIn("ilonMask",53, Gender.male,"spaceX45_");
+       Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+       Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+       Optional<Account> myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
+       Optional<Account> myAccount4=sn.logIn("ilonMask",53, Gender.male,"spaceX45_");
        ArrayList<String> members=new ArrayList<>();
        members.add("alibaba");
        members.add("oppenheimer");
        members.add("peterParker");
        sn.createGroupChat(myAccount1,members,"friends");
        sn.addMember(myAccount1,"friends","ilonMask");
-       GroupChat chat=sn.findGroupChat(myAccount1,"friends");
+       Optional<GroupChat> chat=sn.findGroupChat(myAccount1,"friends");
        members.add("ilonMask");
-       assertTrue(usersCompare(chat.getMembers(),members));
+       assertTrue(usersCompare(chat.get().getMembers(),members));
    }
 
     @Test
     void deleteMember()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
-        Account myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
-        Account myAccount4=sn.logIn("ilonMask",53, Gender.male,"spaceX45_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount3=sn.logIn("peterParker",16, Gender.male,"Peter2288_");
+        Optional<Account> myAccount4=sn.logIn("ilonMask",53, Gender.male,"spaceX45_");
         ArrayList<String> members=new ArrayList<>();
         members.add("alibaba");
         members.add("oppenheimer");
@@ -333,48 +334,48 @@ boolean postsCompare(ArrayList<Post> expected,ArrayList<Post> result)
         sn.createGroupChat(myAccount1,members,"friends");
         sn.deleteMember(myAccount1,"friends","ilonMask");
         members.remove("ilonMask");
-        GroupChat chat=sn.findGroupChat(myAccount1,"friends");
-        assertTrue(usersCompare(chat.getMembers(),members));
+        Optional<GroupChat> chat=sn.findGroupChat(myAccount1,"friends");
+        assertTrue(usersCompare(chat.get().getMembers(),members));
     }
     @Test
     void changeAccess()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         sn.changeAccess(myAccount1, Access.forSubscribers);
-        assertEquals(myAccount1.getAccess(), Access.forSubscribers);
+        assertEquals(myAccount1.get().getAccess(), Access.forSubscribers);
     }
     @Test
     void like()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.addPost(myAccount2,"new post");
         sn.like(myAccount1,"oppenheimer",1);
-        Post post=sn.findPost("oppenheimer",1);
-        assertEquals(1,post.getLikes().size());
+        Optional<Post> post=sn.findPost("oppenheimer",1);
+        assertEquals(1,post.get().getLikes().size());
     }
     @Test
     void comment()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
-        Account myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount2=sn.logIn("oppenheimer",64, Gender.male,"boomMC2_");
         sn.addPost(myAccount2,"new post");
         sn.comment(myAccount1,"oppenheimer",1,"cool");
-        Post post=sn.findPost("oppenheimer",1);
-        assertEquals(post.getComments().size(),1);
+        Optional<Post> post=sn.findPost("oppenheimer",1);
+        assertEquals(post.get().getComments().size(),1);
     }
     @Test
     void findPost()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
+        Optional<Account> myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         sn.addPost(myAccount1,"new post");
-        Post post=sn.findPost("alibaba",1);
+        Optional<Post> post=sn.findPost("alibaba",1);
         Post result=new Post(1,"new post","alibaba");
-        assertTrue(postCompare(post,result));
+        assertTrue(postCompare(post.get(),result));
 
     }
 

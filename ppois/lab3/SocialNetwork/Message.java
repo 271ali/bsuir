@@ -1,3 +1,5 @@
+package org.example.SocialNetwork;
+
 public class Message {
     public Message(int id,String content, String author) {
         this.id=id;
@@ -19,7 +21,8 @@ public class Message {
         return id;
     }
 
-    @Override public String toString(){
+    @Override
+    public String toString(){
         return "from "+ author+" : "+content;
     }
 

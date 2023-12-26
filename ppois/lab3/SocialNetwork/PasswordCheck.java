@@ -1,8 +1,10 @@
+package org.example.SocialNetwork;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordCheck {
-    boolean check(String password)
+    public boolean check(String password)
     {
         String regex = "((?=.*\\d+)(?=.*[a-z])(?=.*[A-Z])(?=.*[_]).{6,15})$";
         Pattern pattern = Pattern.compile(regex);

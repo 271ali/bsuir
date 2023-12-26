@@ -1,18 +1,21 @@
+package org.example.SocialNetwork;
+
 import java.util.ArrayList;
+import java.util.List;
 
-   public class Post {
+public class Post {
 
-    Post(int number,String content,String author)
+    public Post(int number, String content, String author)
     {
         this.number=number;
         this.content=content;
         this.author=author;
     }
-    String content;
-    String author;
-    int number;
-    ArrayList<Like> likes=new ArrayList<>();
-    ArrayList<Message> comments=new ArrayList<>();
+       private String content;
+       private String author;
+       private  int number;
+       private List<Like> likes=new ArrayList<>();
+       private List<Message> comments=new ArrayList<>();
 
     @Override public String toString(){
         return "Post №"+ number+" "+content+
@@ -36,10 +39,10 @@ import java.util.ArrayList;
     public String getContent() {
            return content;
        }
-    public ArrayList<Like> getLikes() {
+    public List<Like> getLikes() {
         return likes;
     }
-    public ArrayList<Message> getComments() {
+    public List<Message> getComments() {
         return comments;
     }
     public int getNumber() {
@@ -49,4 +52,7 @@ import java.util.ArrayList;
         return author;
     }
 
-   }
+    public void setNumber(int number) {
+        this.number = number;
+    }
+}

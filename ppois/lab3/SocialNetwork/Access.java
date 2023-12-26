@@ -1,3 +1,5 @@
+package org.example.SocialNetwork;
+
 public enum Access {
     freeForAll("общедоступный"),
     forSubscribers("ограниченный доступ");

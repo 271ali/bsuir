@@ -6,43 +6,40 @@ public class BidirectionalList  <T extends Comparable <T>>{
     {
         Node<T> node = new Node<T>(info,null,null);
         begin = end = node;
-        node=null;
     }
    public void addPrev(T info)
     {
         Node<T> node = new Node<T>(info,null,begin);
-        begin.prev = node;
+        begin.setPrev(node) ;
         begin=node;
-        node=null;
     }
     public void addNext(T info)
     {
         Node<T> node = new Node<T>(info,end,null);
-        end.next = node;
+        end.setNext(node);
         end = node;
-        node=null;
     }
    public void deleteFirst() {
-        begin = begin.next;
-        begin.prev = null;
+        begin = begin.getNext();
+        begin.setPrev(null);
     }
     public void deleteLast() {
-        end = end.prev;
-        end.next = null;
+        end = end.getPrev();
+        end.setNext(null);//доделать узел перед end
     }
     public void deleteNode(T info)
     {
         Node<T> iter=begin;
         while (iter != null)
         {
-            if (iter.info == info)
+            if (iter.getInfo() == info)
             {
-                (iter.next).prev = iter.prev;
-                (iter.prev).next = iter.next;
+                (iter.getNext()).setPrev(iter.getPrev());
+                (iter.getPrev()).setNext(iter.getNext());
                 iter = null;
                 return;
             }
-            iter=iter.next;
+            iter=iter.getNext();
         }
         System.out.println("No node with the same info");
     }
@@ -51,8 +48,8 @@ public class BidirectionalList  <T extends Comparable <T>>{
         Node<T> iter = begin;
         while (iter!=null)
         {
-            System.out.println(iter.info);
-            iter = iter.next;
+            System.out.println(iter.getInfo());
+            iter = iter.getNext();
         }
     }
     public void viewFromEnd()
@@ -60,32 +57,32 @@ public class BidirectionalList  <T extends Comparable <T>>{
         Node<T> iter = end;
         while (iter != null)
         {
-            System.out.println(iter.info);
-            iter = iter.prev;
+            System.out.println(iter.getInfo());
+            iter = iter.getPrev();
         }
     }
     public void changeFirstAndLast()
     {
-        Node<T> t=new Node<T>(begin.info,begin.prev,begin.next);
-        Node<T> n=new Node<T>(end.info,end.prev,end.next);
-        (t.next).prev=n;
-        (n.prev).next=t;
-        t.prev=n.prev;
-        n.next=t.next;
-        t.next=null;
-        n.prev=null;
+        Node<T> t=new Node<T>(begin.getInfo(),begin.getPrev(),begin.getNext());
+        Node<T> n=new Node<T>(end.getInfo(),end.getPrev(),end.getNext());
+        (t.getNext()).setPrev(n);
+        (n.getPrev()).setNext(t);
+        t.setPrev(n.getPrev());
+        n.setNext(t.getNext());
+        t.setNext(null);
+        n.setPrev(null);
         begin=n;
         end=t;
     }
-    public Node<T> findNote(T info)
+    public Node<T> findNote(T info) throws IllegalArgumentException
     {
         Node<T> iter=begin;
         while(iter!=null)
         {
-            if(iter.info==info) return iter;
-            iter=iter.next;
+            if(iter.getInfo()==info) return iter;
+            iter=iter.getNext();
         }
-        return null;
+        throw new IllegalArgumentException("Нет узла с такой информацией");
     }
     public Node<T> getMax()
     {
@@ -93,8 +90,8 @@ public class BidirectionalList  <T extends Comparable <T>>{
       Node<T> max=begin;
       while(iter!=null)
       {
-          if(iter.info.compareTo(max.info)>0) max=iter;
-          iter=iter.next;
+          if(iter.getInfo().compareTo(max.getInfo())>0) max=iter;
+          iter=iter.getNext();
       }
       return max;
     }
@@ -104,8 +101,8 @@ public class BidirectionalList  <T extends Comparable <T>>{
         Node<T> min=begin;
         while(iter!=null)
         {
-            if(iter.info.compareTo(min.info)<0) min=iter;
-            iter=iter.next;
+            if(iter.getInfo().compareTo(min.getInfo())<0) min=iter;
+            iter=iter.getNext();
         }
         return min;
     }
@@ -118,55 +115,55 @@ public class BidirectionalList  <T extends Comparable <T>>{
             return;
         }
 
-        if (min.prev == null) {
+        if (min.getPrev() == null) {
             begin = max;
         }
 
-        if (max.prev == null) {
+        if (max.getPrev() == null) {
             begin = min;
         }
-        if (min.next == null) {
+        if (min.getNext() == null) {
             end = max;
         }
 
-        if (max.next == null) {
+        if (max.getNext() == null) {
             end = min;
         }
 
-        if (min.next == max) {
-            Node<T> minPrev = min.prev;
-            Node<T>maxNext = max.next;
-            min.prev = max;
-            min.next = maxNext;
-            max.prev = minPrev;
-            max.next = min;
+        if (min.getNext() == max) {
+            Node<T> minPrev = min.getPrev();
+            Node<T>maxNext = max.getNext();
+            min.setPrev(max);
+            min.setNext(maxNext);
+            max.setPrev(minPrev);
+            max.setNext(min);
             if (minPrev != null) {
-                minPrev.next = min;
+                minPrev.setNext(min);
             }
             if (maxNext != null) {
-                maxNext.prev = max;
+                maxNext.setPrev(max);
             }
             return;
         }
-        Node<T> minNodePrev = min.prev;
-        Node <T> minNodeNext = min.next;
-        Node<T> maxNodePrev = max.prev;
-        Node<T> maxNodeNext = max.next;
-        min.prev = maxNodePrev;
-        min.next = maxNodeNext;
-        max.prev = minNodePrev;
-        max.next = minNodeNext;
+        Node<T> minNodePrev = min.getPrev();
+        Node <T> minNodeNext = min.getNext();
+        Node<T> maxNodePrev = max.getPrev();
+        Node<T> maxNodeNext = max.getNext();
+        min.setPrev(maxNodePrev);
+        min.setNext(maxNodeNext);
+        max.setPrev(minNodePrev);
+        max.setNext(minNodeNext);
         if (minNodePrev != null) {
-            minNodePrev.next = max;
+            minNodePrev.setNext(max);
         }
         if (minNodeNext != null) {
-            minNodeNext.prev = max;
+            minNodeNext.setPrev(max);
         }
         if (maxNodePrev != null) {
-            maxNodePrev.next = min;
+            maxNodePrev.setNext(min);
         }
         if (maxNodeNext != null) {
-            maxNodeNext.prev = min;
+            maxNodeNext.setPrev(min);
         }
     }
 

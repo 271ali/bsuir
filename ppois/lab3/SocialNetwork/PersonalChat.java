@@ -1,3 +1,5 @@
+package org.example.SocialNetwork;
+
 public class PersonalChat extends Chat {
     public PersonalChat(String firstMember,String secondMember,String name)
     {
@@ -5,8 +7,8 @@ public class PersonalChat extends Chat {
         this.firstMember=firstMember;
         this.secondMember=secondMember;
     }
-    String firstMember;
-    String secondMember;
+    private String firstMember;
+    private String secondMember;
 
     public String getFirstMember() {
         return firstMember;
