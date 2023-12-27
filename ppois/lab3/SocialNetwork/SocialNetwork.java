@@ -43,13 +43,8 @@ public class SocialNetwork {
     }
     public void deleteAccount(Account account)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Users.remove(account.getNickname());
         account=null;
@@ -57,26 +52,16 @@ public class SocialNetwork {
 
     public void addPost (Account account, String content)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Post post=new Post(account.getPosts().size()+1,content,account.getNickname());
         account.getPosts().add(post);
     }
     public void deletePost(Account account, int postNumber)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         int index=0;
         for(Post post: account.getPosts()) {
@@ -96,13 +81,8 @@ public class SocialNetwork {
     }
     public void subscribe(Account account, String userNickname)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
        Account userAccount=Users.get(userNickname);
        account.getSubscriptions().add(userNickname);
@@ -110,13 +90,8 @@ public class SocialNetwork {
     }
     public void unsubscribe(Account account, String userNickname)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Account userAccount=Users.get(userNickname);
         account.getSubscriptions().remove(userNickname);
@@ -124,13 +99,8 @@ public class SocialNetwork {
     }
     public Chat createGroupChat(Account account, ArrayList<String> members, String name)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         members.add(account.getNickname());
         for(Chat chat:account.getChats());
@@ -144,13 +114,8 @@ public class SocialNetwork {
     }
     public Chat createPersonalChat(Account account, String nickname, String name)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Account member=Users.get(nickname);
         PersonalChat personalChat=new PersonalChat(account.getNickname(),nickname,name);
@@ -161,13 +126,8 @@ public class SocialNetwork {
 
     public void sendMessage(Account account, String content, String chatName)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         for(Chat chat: account.getChats()) {
             if(chat.getName().equals(chatName)) {
@@ -179,13 +139,8 @@ public class SocialNetwork {
     }
     public GroupChat findGroupChat(Account account, String chatName)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
             List<Chat> chats = account.getChats();
             Optional<GroupChat> answer=Optional.ofNullable(null);
@@ -208,13 +163,8 @@ public class SocialNetwork {
     public PersonalChat findPersonalChat(Account account, String chatName)
     {
 
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         List<Chat> chats = account.getChats();
         Optional<PersonalChat> answer=Optional.ofNullable(null);
@@ -236,13 +186,8 @@ public class SocialNetwork {
     }
     public void addMember(Account account, String chatName, String member)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         for(Chat chat:account.getChats())
         {
@@ -256,13 +201,8 @@ public class SocialNetwork {
     }
     public void deleteMember(Account account, String chatName, String member)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         for(Chat chat:account.getChats())
         {
@@ -276,13 +216,8 @@ public class SocialNetwork {
 
     public void like(Account account, String nickname, int id)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Account user=Users.get(nickname);
         Post post=findPost(nickname,id);
@@ -291,13 +226,8 @@ public class SocialNetwork {
     }
    public void comment(Account account, String nickname, int id, String content)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
-            }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
+        if (account == null) {
+            throw new RuntimeException("Wrong data");
         }
         Account user=Users.get(nickname);
         Post post=findPost(nickname,id);
@@ -306,14 +236,10 @@ public class SocialNetwork {
     }
     public void changeAccess(Account account, Access access)
     {
-        try {
-            if (account==null) {
-                throw new Exception("Wrong data");
+            if (account == null) {
+                throw new RuntimeException("Wrong data");
             }
-        } catch (Exception ex) {
-            System.out.println("Wrong data for Sign In");
-            throw new RuntimeException(ex);
-        }
+
         account.setAccess(access);
     }
     public Post findPost(String nickname, int id)

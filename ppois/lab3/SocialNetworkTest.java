@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -419,13 +418,13 @@ boolean postsCompare(List<Post> expected, List<Post> result)
         assertTrue(postCompare(post,result));
 
     }
+
     @Test
-    void findPostException()
+    void likeException()
     {
         SocialNetwork sn=new SocialNetwork("odnoklassniki");
-        Account myAccount1=sn.logIn("alibaba",19, Gender.female,"12345aBc_");
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
-            Post result=sn.findPost("alibaba",10);
+            sn.like(null,"oppenheimer",1);;
         });
 
     }
