@@ -1,0 +1,137 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Person {
+    -name: str
+    -age: int
+
+    +__init__(self,in name: str, in age: int): None
+    +get_name(self):int
+    +get_age(self): int
+}
+
+class Child {
+    -name : str
+    -age: int
+    -group_number: int
+    -sleepy: bool
+    -hungry: bool
+    -soft_skills: dict[str, int]
+    -hard_skills: dict[str, int]
+
+    +__init__(self, name: str, age: int): None
+    +sleep(self): None
+    +eat(self): None
+    +play(self,in game: EducationalGames): None
+    +educate(self,in material: EducationalMaterials): None
+    +get_group_number(self): int
+    +get_hungry(self): bool
+    +get_sleepy(self): bool
+    +get_soft_skill(self,in skill_name: SoftSkill): int
+    +get_hard_skill(self,in skill_name: HardSkill): int
+    +get_soft_skills(self): dict[str, int]
+    +get_hard_skills(self): dict[str, int]
+    +set_hungry(self,in hungry: bool): None
+    +set_sleepy(self,in sleepy: bool): None
+    +set_group_number(self,in group_number: int): None
+}
+
+class Parent {
+    -name: str
+    -age: int
+    -children: list[Child]
+
+    +__init__(self,in name: str,in age: int,in children: list[Child]): None
+    +get_children(self): list[Child]:
+}
+
+class EducationalGame {
+    -name: str
+    -skill: SoftSkill
+
+    +_init__(self,in name: str,in skill: SoftSkill): None
+    +get_name(self): str
+    +get_skill(self): SoftSkill
+}
+
+class EducationalMaterial {
+    -name: str
+    -age: int
+    -skill: HardSkill
+
+    +__init__(self, in name: str, in age: int, in skill: HardSkill): None
+    +get_name(self): str
+    +get_age(self): int
+    +get_skill(self): HardSkill
+}
+
+class Kindergartener{
+    -name: str
+    -age: int
+    -group_number: int
+    -experience: int
+    -age_range: tuple[int, int]
+    -group: list[Child]
+    -present_group: list[Child]
+
+    +__init__(self,in name: str,in age: int,in group_number: int,in experience: int,in age_range: tuple[int, int]): None
+    +put_to_bed(self): None
+    +feed(self): None
+    +play(self,in games: list[EducationalGames]): None
+    +educational_process(self,in materials: list[EducationalMaterials]): None
+    +send_the_child_home(self,in parent: Parent,in child: Child): None
+    +meet_the_child(self,in child: Child,in parent: Parent): None
+    +get_experience(self): int
+    +get_group_number(self): int
+    +get_group(self): list[Child]
+    +get_age_range(self): tuple[int, int]
+    +get_present_group(self): list[Child]
+}
+
+class Kindergarten{
+    -name: str
+    -kindergarteners: list[Kindergartener]
+    -educational_plan: list[EducationalMaterials]
+    -educational_games: list[EducationalGames]
+    -max_group_size: int
+
+    +__init__(self,in name: str,in kindergarteners: list[Kindergartener],in educational_plan: list[EducationalMaterials],
+                in educational_games: list[EducationalGames],in max_group_size: int): None
+    +registration(self,in group_number: int,in child: Child): None
+    +groups_info(self): None
+    +pick_up_children(self,in parent: Parent): None
+    +educate(self,in group_number: int): None
+    +play(self,in group_number: int): None
+    +nutrition(self,in group_number: int): None
+    +nap(self,in group_number: int): None
+    +expel(self,in child: Child): None
+}
+
+enum SoftSkill {
+    +communication
+    +physical_endurance
+    +attentiveness
+    +patience
+}
+
+enum HardSkill {
+    +logics
+    +literacy
+    +creativity
+    +erudition
+}
+
+Person <|-- Parent
+Person <|-- Child
+Person <|-- Kindergartener
+SoftSkill *-- EducationalGame
+HardSkill *-- EducationalMaterial
+Child *-- Parent
+Kindergartener *-- Kindergarten
+EducationalGame o-- Kindergarten
+EducationalMaterial o-- Kindergarten
+SoftSkill o-- Child
+HardSkill o-- Child
+
+
+@enduml
