@@ -1,21 +1,23 @@
 from Child import Child
 from Parent import Parent
 from Kindergartener import Kindergartener
-from EducationalMaterials import EducationalMaterials
+from EducationalMaterial import EducationalMaterial
 from EducationalGame import EducationalGame
 
 
 class Kindergarten:
-    def __init__(self, name: str, kindergarteners: list[Kindergartener], educational_plan: list[EducationalMaterials],
+    def __init__(self, name: str, kindergarteners: list[Kindergartener], educational_plan: list[EducationalMaterial],
                  educational_games: list[EducationalGame], max_group_size: int) -> None:
         self.__name: str = name
         self.__kindergarteners: list[Kindergartener] = kindergarteners
-        self.__educational_plan: list[EducationalMaterials] = educational_plan
+        self.__educational_plan: list[EducationalMaterial] = educational_plan
         self.__educational_games: list[EducationalGame] = educational_games
         self.__max_group_size: int = max_group_size
 
     def registration(self, group_number: int, child: Child) -> None:
         for kindergartener in self.__kindergarteners:
+            if child in kindergartener.get_group():
+                print("Child is already registered")
             if kindergartener.get_group_number() == group_number:
                 if self.__max_group_size - len(kindergartener.get_group()) > 0:
                     if kindergartener.get_age_range()[1] >= child.get_age() >= kindergartener.get_age_range()[0]:
@@ -84,13 +86,19 @@ class Kindergarten:
                 if child.get_group_number() == kindergartener.get_group_number():
                     kindergartener.send_the_child_home(parent, child)
 
-    def expel(self, child: Child) -> None:
+    def expel(self, group_number: int, child: Child) -> None:
         for kindergartener in self.__kindergarteners:
-            for current_child in kindergartener.get_group():
-                if current_child == child:
+            if kindergartener.get_group_number() == group_number:
+                if child not in kindergartener.get_group():
+                    print(f"{child.get_name()} not found,try again")
+                else:
                     child.set_group_number(-1)
                     kindergartener.get_group().remove(child)
                     print(f"""
-                        {child.get_name()} was successfully expelled in group {kindergartener.get_group_number()} 
-                        (Kindergartener: {kindergartener.get_name()})
-                         """)
+                          {child.get_name()} was successfully expelled in group {kindergartener.get_group_number()} 
+                          (Kindergartener: {kindergartener.get_name()})
+                            """)
+                    break
+
+    def get_kindergarteners(self):
+        return self.__kindergarteners

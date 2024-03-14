@@ -2,7 +2,7 @@ from Person import Person
 import Parent
 import Child
 from EducationalGame import EducationalGame
-import EducationalMaterials
+import EducationalMaterial
 
 
 class Kindergartener(Person):
@@ -22,22 +22,52 @@ class Kindergartener(Person):
         for child in self.__group:
             child.eat()
 
-    def play(self, games: list[EducationalGame]) -> None:
-        for child in self.__present_group:
-            min_skill = min(child.get_soft_skills(), key=child.get_soft_skills().get)
-            for game in games:
-                if game.get_skill().name == min_skill:
-                    child.play(game)
-                    break
+    def __choose_children(self) -> list[Child]:
+        children: list[Child] = []
+        for i in range(len(self.__present_group)):
+            print(f"{i + 1}. {self.__present_group[i].get_name()}")
+        print("Please choose child or enter 0")
+        while True:
+            val = int(input(""))
+            if val == 0:
+                print("Selection completed")
+                break
+            if self.__present_group[val-1] not in children:
+                children.append(self.__present_group[val - 1])
+                print("Addition")
+            else:
+                print("This child is already selected")
 
-    def educational_process(self, materials: list[EducationalMaterials]) -> None:
-        for material in materials:
-            for child in self.__present_group:
-                if material.get_age() <= child.get_age() < material.get_age() + 3:
-                    child.educate(material)
+            if val > len(self.__present_group):
+                print("Uncorrected number,try again")
+        return children
+
+    def play(self, games: list[EducationalGame]) -> None:
+        while True:
+            players = self.__choose_children()
+            print(f"{0}. stop playing")
+            for i in range(len(games)):
+                print(f"{i+1}. {games[i].get_name()}")
+            val = int(input("Choose the game:"))
+            if val == 0:
+                break
+            for child in players:
+                child.play(games[val-1])
+
+    def educational_process(self, materials: list[EducationalMaterial]) -> None:
+        while True:
+            smart_guys = self.__choose_children()
+            print(f"{0}. stop education")
+            for i in range(len(materials)):
+                print(f"{i + 1}. {materials[i].get_name()}")
+            val = int(input("Choose the material: "))
+            if val == 0:
+                break
+            for child in smart_guys:
+                child.educate(materials[val-1])
 
     def send_the_child_home(self, parent: Parent, child: Child) -> None:
-        print(f"{parent.name} your child is a genius,thank you!")
+        print(f"{parent.get_name()} your child is a genius,thank you!")
         print(f"""
         There are results of the day :
         Soft skills:
@@ -48,7 +78,7 @@ class Kindergartener(Person):
 
     def meet_the_child(self, child: Child, parent: Parent) -> None:
         self.__present_group.append(child)
-        print(f"Hello,{parent.name}! Your child is in safe hands")
+        print(f"Hello,{parent.get_name()}! Your child is in safe hands")
 
     def get_experience(self) -> int:
         return self.__experience
@@ -64,3 +94,5 @@ class Kindergartener(Person):
 
     def get_present_group(self) -> list[Child]:
         return self.__present_group
+
+

@@ -4,11 +4,31 @@ from pickle import load
 def load_changes():
     with open("info.pickle", "rb") as file:
         try:
-            kindergarten, child = load(file)
+            kindergarten = load(file)
+            child = load(file)
             return kindergarten, child
         except EOFError:
-            # Обработка ошибки, если файл не содержит достаточного количества данных
-            print("File does not contain enough data.")
+            print("File does not contain enough data")
             return None, None
 
 
+def load_for_test():
+    with open("test.pickle", "rb") as file:
+        try:
+            kindergarten = load(file)
+            child = load(file)
+            return kindergarten, child
+        except EOFError:
+            print("File does not contain enough data")
+            return None, None
+
+
+def load_for_test_void():
+    with open("test_void.pickle", "rb") as file:
+        try:
+            kindergarten = load(file)
+            child = load(file)
+            return kindergarten, child
+        except EOFError:
+            print("File does not contain enough data")
+            return None, None

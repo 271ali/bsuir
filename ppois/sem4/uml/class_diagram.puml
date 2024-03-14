@@ -86,6 +86,8 @@ class Kindergartener{
     +get_group(self): list[Child]
     +get_age_range(self): tuple[int, int]
     +get_present_group(self): list[Child]
+    -choose_children(self): list[Child]
+
 }
 
 class Kindergarten{

@@ -1,6 +1,6 @@
 from Person import Person
-from EducationalGame import EducationalGames
-from EducationalMaterials import EducationalMaterials
+from EducationalGame import EducationalGame
+from EducationalMaterial import EducationalMaterial
 from SoftSkill import SoftSkill
 from HardSkill import HardSkill
 
@@ -25,27 +25,41 @@ class Child(Person):
         }
 
     def sleep(self) -> None:
-        print(f"{self.__name} is sleeping")
-        self.__sleepy = False
-        self.__hungry = True
+        if self.__sleepy:
+            print(f"{self.get_name()} is sleeping")
+            self.__sleepy = False
+        else:
+            print(f"{self.get_name()} is not sleepy")
 
     def eat(self) -> None:
-        print(f"{self.__name} is eating")
-        self.__hungry = False
-        self.__sleepy = True
+        if self.__hungry:
+            print(f"{self.get_name()} is eating")
+            self.__hungry = False
+            self.__sleepy = True
+        else:
+            print(f"{self.get_name()} is not hungry")
 
-    def play(self, game: EducationalGames) -> None:
-        print(f"{self.__name} plays a {game.get_name()}")
-        print(f"{game.get_skill().name} has improved")
-        self.__soft_skills[game.get_skill().name] += 1
-        self.__sleepy = False
-        self.__hungry = True
 
-    def educate(self, material: EducationalMaterials) -> None:
-        print(f"{self.__name} educates with {material.get_name()}")
-        print(f"{material.get_skill().name} has improved")
-        self.__hard_skills[material.get_skill().name] += 1
-        self.__sleepy = True
+    def play(self, game: EducationalGame) -> None:
+        if self.__hungry:
+            print(f"{self.get_name()} is already hungry")
+        else:
+            print(f"{self.get_name()} plays a {game.get_name()}")
+            print(f"{game.get_skill().name} has improved")
+            self.__soft_skills[game.get_skill().name] += 1
+            self.__sleepy = False
+            self.__hungry = True
+
+    def educate(self, material: EducationalMaterial) -> None:
+        if self.get_age() < material.get_age():
+            print(f"{self.get_name()} is too young for this material")
+        elif self.__sleepy:
+            print(f"{self.get_name()} is tired for education")
+        else:
+            print(f"{self.get_name()} educates with {material.get_name()}")
+            print(f"{material.get_skill().name} has improved")
+            self.__hard_skills[material.get_skill().name] += 1
+            self.__sleepy = True
 
     def get_group_number(self) -> int:
         return self.__group_number
