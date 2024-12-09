@@ -1,0 +1,118 @@
+        .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+        .dots-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+        .dot:not(:first-child) {
+      margin-left: 5px;
+    }
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Центрирование по горизонтали и вертикали */
+            display: flex;
+            flex-direction: column; /* Располагаем кнопки в колонку */
+            gap: 20px;              /* Расстояние между кнопками */
+            align-items: center;    /* Выравнивание кнопок по центру */
+        }
+
+        .button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            width: 400px; /* Фиксированная ширина кнопок */
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+      .center-wrapper {
+            display: flex;
+            justify-content: center; /* Горизонтальное центрирование */
+            align-items: center; /* Вертикальное центрирование */
+            height: 100vh; /* Полная высота экрана */
+            margin: 0;
+        }
+
+        .registration-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .registration-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group .radio-options {
+            display: flex;
+            flex-direction: column; /* Расположить радио-кнопки вертикально */
+            margin-top: 10px;
+        }
+
+        .form-group .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Отступ между радио-кнопками */
+        }
+
+        .form-group .radio-option input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .submit-button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: darkgreen;
+        }
